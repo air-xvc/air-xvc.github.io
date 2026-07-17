@@ -327,12 +327,15 @@ def render_hub():
 
 # ----------------------------------------------------------------------------- homepage fragments
 def render_board():
+    """首页榜单：按 airports 数组顺序，仅 featured；名次 01/02/03… 与榜序一致。"""
     out = []
-    for i, a in enumerate(AIRPORTS):
+    rank = 0
+    for a in AIRPORTS:
         if not a.get("featured"):
             continue
-        gate = "%02d" % (i + 1)
-        best = '<span class="best">%s</span>' % esc(a["rank_label"]) if a.get("rank_label") and i == 0 else ""
+        rank += 1
+        gate = "%02d" % rank
+        best = ('<span class="best">%s</span>' % esc(a["rank_label"])) if a.get("rank_label") and rank == 1 else ""
         label = '<span class="chip cy">%s</span>' % esc(a["rank_label"]) if a.get("rank_label") else ""
         tags = chips([a["type_short"] + " 线路"] + a["protocols"]) + chips(a["unlock"][:2], "on")
         out.append(
@@ -347,10 +350,9 @@ def render_board():
     return "\n".join(out)
 
 def render_pick():
+    # 决策卡只取榜单前 4，避免挤满屏
     out = []
-    for a in AIRPORTS:
-        if not a.get("featured"):
-            continue
+    for a in [x for x in AIRPORTS if x.get("featured")][:4]:
         out.append(
             '<a class="pick-card" href="/%s/"><div class="q">// %s</div><h3>%s</h3>'
             '<p>%s</p><span class="rec">推荐 %s'
