@@ -1,0 +1,22 @@
+# robots.txt — AIRXVC 领航 · 机场推荐榜
+# 放行所有搜索引擎与爬虫
+User-agent: *
+Allow: /
+
+# 主流搜索引擎（显式放行，含百度/必应/谷歌/搜狗/360/头条/Yandex）
+User-agent: Baiduspider
+Allow: /
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: Sogou web spider
+Allow: /
+User-agent: 360Spider
+Allow: /
+User-agent: Bytespider
+Allow: /
+User-agent: YandexBot
+Allow: /
+
+Sitemap: https://air-xvc.github.io/sitemap.xml

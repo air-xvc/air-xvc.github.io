@@ -1,0 +1,16 @@
+{
+  "name": "AIRXVC 领航 · 机场推荐榜",
+  "short_name": "AIRXVC 领航",
+  "description": "独立的机场（科学上网）推荐与评测站，帮你按需求快速选对高速稳定的机场。",
+  "lang": "zh-CN",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#060917",
+  "theme_color": "#060917",
+  "icons": [
+    { "src": "/assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

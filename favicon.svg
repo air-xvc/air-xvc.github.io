@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="AIRXVC 领航">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="64" y2="64">
+      <stop offset="0" stop-color="#35E0D4"/><stop offset=".5" stop-color="#7E7BFF"/><stop offset="1" stop-color="#FF6AD5"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="#0A0F24"/>
+  <circle cx="32" cy="32" r="20" fill="none" stroke="url(#g)" stroke-width="2.4" opacity=".55"/>
+  <path d="M32 10 L42 51 L32 43 L22 51 Z" fill="url(#g)"/>
+  <circle cx="32" cy="32" r="3.6" fill="#fff"/>
+</svg>
