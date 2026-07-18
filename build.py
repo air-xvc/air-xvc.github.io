@@ -26,6 +26,10 @@ esc = html.escape
 def chips(items, cls=""):
     return "".join('<span class="chip %s">%s</span>' % (cls, esc(x)) for x in items)
 
+def emby_badge(a):
+    # Emby 影音库高亮徽章（紫色描边 chip，克制而醒目；无 emby 标记则不输出）
+    return '<span class="chip emby">🎬 Emby 影音库</span>' if a.get("emby") else ""
+
 def emblem(a, size=64):
     s, slug = size, a["slug"]
     c1, c2 = a["accent"]
@@ -63,7 +67,7 @@ def nav_html():
 '<span>AIRXVC<small>领航 · 机场推荐榜</small></span></a>'
 '<button class="nav-toggle" aria-label="展开菜单" aria-expanded="false">☰</button>'
 '<div class="nav-links">'
-'<a href="/#board">机场榜单</a><a href="/airports/">机场大全</a>'
+'<a href="/#board">机场榜单</a><a href="/#emby">Emby影音</a><a href="/airports/">机场大全</a>'
 '<a href="/#guide">怎么选</a><a href="/#compare">参数对比</a><a href="/#faq">常见问题</a>'
 '<a class="btn btn-primary nav-cta" href="/airports/">全部机场</a></div></nav></header>')
 
@@ -90,8 +94,21 @@ def footer_html():
 SKIP_STYLE = ('<style>.skip{position:absolute;left:-999px;top:0;z-index:100;background:var(--amber);'
               'color:#241300;padding:10px 16px;border-radius:0 0 10px 0;font-weight:600}.skip:focus{left:0}</style>')
 
+# 多域自认领：canonical/hreflang 已相对化（任何访问域名自动解析成本域）。
+# 下面这段在浏览器/搜索引擎渲染时，把 og/twitter/JSON-LD 里的主域改写成“当前访问域名”，
+# 让每个镜像域名都被独立收录；在主域上执行为 no-op，对 GitHub Pages 无影响。
+ORIGIN_JS = (
+    '<script>(function(){var o=location.origin,P=%s;if(o===P)return;'
+    'document.querySelectorAll(\'meta[property="og:url"],meta[property="og:image"],meta[name="twitter:image"]\')'
+    '.forEach(function(m){var c=m.getAttribute("content");if(c)m.setAttribute("content",c.split(P).join(o));});'
+    'var s=document.querySelector(\'script[type="application/ld+json"]\');'
+    'if(s)s.textContent=s.textContent.split(P).join(o);})();</script>'
+) % json.dumps(B)
+
 def head(title, desc, canonical, keywords, og_image, jsonld, og_type="article"):
     j = json.dumps(jsonld, ensure_ascii=False, separators=(",", ":"))
+    cpath = canonical[len(B):] if canonical.startswith(B) else canonical  # 相对路径：每个访问域名自动自认领
+    cpath = cpath or "/"
     return """<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -127,13 +144,14 @@ def head(title, desc, canonical, keywords, og_image, jsonld, og_type="article"):
 <link rel="stylesheet" href="/assets/style.css">
 %s
 <script type="application/ld+json">%s</script>
+%s
 </head>
 <body>
 <a class="skip" href="#main">跳到主内容</a>
 <div class="bg-grid" aria-hidden="true"></div>
-""" % (esc(title), esc(desc), esc(keywords), canonical, canonical, canonical, og_type,
+""" % (esc(title), esc(desc), esc(keywords), cpath, cpath, cpath, og_type,
        esc(title), esc(desc), canonical, og_image, esc(title), esc(desc), og_image,
-       SKIP_STYLE, j)
+       SKIP_STYLE, j, ORIGIN_JS)
 
 SCRIPTS = '<script src="/assets/config.js"></script>\n<script src="/assets/app.js" defer></script>\n</body>\n</html>\n'
 
@@ -244,9 +262,9 @@ def render_detail(a):
     out += '<div class="hero-detail">'
     out += '<div>'
     en_span = ('<span style="color:var(--ink-3);font-family:var(--font-mono);font-size:.5em;font-weight:400">%s</span>' % esc(en_disp)) if en_disp else ""
-    out += '<div style="display:flex;align-items:center;gap:16px;margin-bottom:18px">%s<div><h1 style="font-size:clamp(30px,5vw,46px)">%s %s</h1><div class="tagrow" style="margin-top:8px">%s%s</div></div></div>' % (
+    out += '<div style="display:flex;align-items:center;gap:16px;margin-bottom:18px">%s<div><h1 style="font-size:clamp(30px,5vw,46px)">%s %s</h1><div class="tagrow" style="margin-top:8px">%s%s%s</div></div></div>' % (
         emblem(a, 64), esc(name), en_span,
-        '<span class="chip cy">%s · %s</span>' % (esc(a["type_short"]), esc(a["year"])), label)
+        '<span class="chip cy">%s · %s</span>' % (esc(a["type_short"]), esc(a["year"])), label, emby_badge(a))
     out += '<p class="lead" style="color:var(--ink-2);font-size:17px;margin:8px 0 18px">%s</p>' % esc(a["tagline"])
     out += '<div class="verdict"><b>一句话点评：</b>%s</div>' % esc(a["verdict"])
     out += '<div class="tagrow" style="margin-top:18px">%s%s</div>' % (
@@ -376,6 +394,26 @@ def render_footer_airports():
     return "\n".join('<a href="/%s/">%s %s</a>' % (a["slug"], esc(a["name"]), esc(a["en"]))
                      for a in AIRPORTS if a.get("featured"))
 
+def render_emby():
+    """首页「Emby 影音专区」：只收录带 emby 标记的机场（不依赖 featured）。"""
+    out = []
+    for a in AIRPORTS:
+        if not a.get("emby"):
+            continue
+        en = esc(a["en"]) if a["en"] != a["name"] else ""
+        small = ("<small>%s</small>" % en) if en else ""
+        out.append(
+            '<article class="card emby-card">'
+            '<div class="emby-head">%s'
+            '<div><h3>%s%s</h3>'
+            '<div class="tagrow" style="margin-top:7px">%s</div></div></div>'
+            '<p class="desc">%s</p>'
+            '<div class="emby-foot"><span class="price"><b>%s</b>%s</span>'
+            '<a class="btn btn-aurora" href="/%s/">看评测 →</a></div></article>'
+            % (emblem(a, 46), esc(a["name"]), small, emby_badge(a), esc(a["tagline"]),
+               esc(a["price_from"]), esc(a["price_unit"]), a["slug"]))
+    return "\n".join(out)
+
 def inject(text, name, inner):
     pat = re.compile(r"(<!--GEN:%s:START-->).*?(<!--GEN:%s:END-->)" % (name, name), re.S)
     return pat.sub(lambda m: m.group(1) + "\n" + inner + "\n" + m.group(2), text)
@@ -444,6 +482,7 @@ def render_readme():
     L.append("")
     L.append("- [本仓库是什么](#本仓库是什么)")
     L.append("- [2026 精选机场榜单](#2026-精选机场榜单)")
+    L.append("- [Emby 影音机场推荐](#emby-影音机场推荐)")
     L.append("- [机场快速对比表](#机场快速对比表)")
     L.append("- [30 秒教你怎么选机场](#30-秒教你怎么选机场)")
     L.append("- [新手入门：第一次用机场](#新手入门第一次用机场)")
@@ -520,6 +559,22 @@ def render_readme():
         L.append(a["verdict"])
         L.append("")
         L.append("**完整评测与优惠信息 → [%s 机场评测](%s/%s/)**" % (title, A, a["slug"]))
+        L.append("")
+
+    # --- Emby 影音机场 ---
+    emby_list = [a for a in AIRPORTS if a.get("emby")]
+    if emby_list:
+        L.append("## Emby 影音机场推荐")
+        L.append("")
+        L.append(
+            "下面这几家在订阅之外还 **内置 / 赠送 Emby 私人影视库**：装上 Emby 客户端、用机场提供的账号登录即可在线看片，"
+            "相当于自带一个「私人奈飞」，省去自己找片源。它们 **稳定、速度快，UP 主与追剧党常用**。"
+            "片源、清晰度与可用性以各机场官网实时信息为准。"
+        )
+        L.append("")
+        for a in emby_list:
+            title = a["name"] if a["en"] == a["name"] else "%s %s" % (a["name"], a["en"])
+            L.append("- 🎬 **[%s](%s/%s/)** — %s" % (title, A, a["slug"], a["tagline"]))
         L.append("")
 
     # --- 对比表 ---
@@ -656,6 +711,7 @@ def main():
     idx_path = os.path.join(BASE, "index.html")
     idx = open(idx_path, encoding="utf-8").read()
     idx = inject(idx, "BOARD", render_board())
+    idx = inject(idx, "EMBY", render_emby())
     idx = inject(idx, "PICK", render_pick())
     idx = inject(idx, "COMPARE", render_compare())
     idx = inject(idx, "WALL", render_wall())

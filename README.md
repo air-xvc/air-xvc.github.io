@@ -16,6 +16,7 @@
 
 - [本仓库是什么](#本仓库是什么)
 - [2026 精选机场榜单](#2026-精选机场榜单)
+- [Emby 影音机场推荐](#emby-影音机场推荐)
 - [机场快速对比表](#机场快速对比表)
 - [30 秒教你怎么选机场](#30-秒教你怎么选机场)
 - [新手入门：第一次用机场](#新手入门第一次用机场)
@@ -91,16 +92,16 @@ English: Independent **proxy / VPN-like subscription (机场)** reviews and rank
 
 <img src="assets/og/shouhou.png" alt="守候 Shouhou 机场评测与推荐 · 科学上网" width="720">
 
-> 2020 年老牌机场，中转+专线双线路，节点丰富含低倍率
+> 2020 年老牌机场，中转+专线双线路，节点丰富含低倍率，并提供 Emby 私人影视库，装上 Emby 客户端登录即看，追剧党省心。
 
 - **线路类型**：公网中转 + IPLC 专线
 - **主要协议**：Shadowsocks
-- **流媒体解锁**：Netflix · Disney+ · ChatGPT
+- **流媒体解锁**：Netflix · Disney+ · ChatGPT · Emby 影视库
 - **覆盖地区**：香港 · 台湾 · 新加坡 · 美国 等 10+ 地区
 - **起步价**：¥15 起 / 月（包月 / 包年）
-- **最适合**：稳健老用户
+- **最适合**：稳健老用户 / Emby 影音
 
-运营时间较长，节点数量与入口丰富，提供低倍率节点省流量；即便老牌也建议先月付观察，再考虑年付。
+运营时间较长、节点与入口丰富，提供低倍率节点省流量，还内置 Emby 影视库——相当于自带一个私人影院，稳定、速度快，UP 主也在用；即便老牌也建议先月付观察，再考虑年付。
 
 **完整评测与优惠信息 → [守候 Shouhou 机场评测](https://air-xvc.github.io/shouhou/)**
 
@@ -176,16 +177,16 @@ English: Independent **proxy / VPN-like subscription (机场)** reviews and rank
 
 <img src="assets/og/yuyun.png" alt="渔云 YuYun 机场评测与推荐 · 科学上网" width="720">
 
-> IEPL 专线起步的新锐机场，主打稳定运营与多端定制
+> IEPL 专线起步的新锐机场，主打稳定运营与多端定制，全套餐赠送 Emby 影视库，追剧观影一步到位。
 
 - **线路类型**：IEPL 专线 + 中转
 - **主要协议**：VLESS · Hysteria2
-- **流媒体解锁**：Netflix · Disney+ · ChatGPT
+- **流媒体解锁**：Netflix · Disney+ · ChatGPT · Emby 影视库
 - **覆盖地区**：香港 · 日本 · 台湾 · 新加坡 · 美国 等
 - **起步价**：¥9 起 / 月（包月 / 按量）
-- **最适合**：长期稳定党
+- **最适合**：长期稳定 / Emby 影音
 
-节点覆盖主流地区、协议较新，定位长期稳定而非低价冲量；作为新站建议先月付小额验证稳定性再长期用。
+节点覆盖主流地区、协议较新，定位长期稳定而非低价冲量，且各档套餐均赠送 Emby 影视库——装上 Emby 客户端登录即看，稳定、速度快，UP 主在用；新站建议先月付小额验证再长期用。
 
 **完整评测与优惠信息 → [渔云 YuYun 机场评测](https://air-xvc.github.io/yuyun/)**
 
@@ -278,16 +279,16 @@ English: Independent **proxy / VPN-like subscription (机场)** reviews and rank
 
 <img src="assets/og/yun69.png" alt="69云 69Yun 机场评测与推荐 · 科学上网" width="720">
 
-> 2022 年专线中转机场，节点覆盖广（含冷门地区），常搭配 Emby
+> 2022 年专线中转机场，节点覆盖广（含冷门地区），并提供 Emby 影视库，装上客户端登录即看，追剧党友好。
 
 - **线路类型**：专线中转
 - **主要协议**：Shadowsocks · VMess
-- **流媒体解锁**：Netflix · Disney+ · HBO · ChatGPT
+- **流媒体解锁**：Netflix · Disney+ · HBO · ChatGPT · Emby 影视库
 - **覆盖地区**：亚洲 · 欧美 · 含多个冷门地区
 - **起步价**：¥9.9 起 / 月（包月 / 按量）
-- **最适合**：冷门地区/备用
+- **最适合**：冷门地区 / Emby 影音
 
-节点覆盖面广、冷门地区有优势，套餐多样，适合主力或备用；建议先低价月付验证晚高峰与解锁，再考虑长期。
+节点覆盖面广、冷门地区有优势，套餐多样，还提供 Emby 影视库——登录即看片，稳定、速度快，UP 主在用，适合主力或备用；建议先低价月付验证晚高峰与解锁，再考虑长期。
 
 **完整评测与优惠信息 → [69云 69Yun 机场评测](https://air-xvc.github.io/yun69/)**
 
@@ -397,16 +398,16 @@ KTM Cloud 是 2023 年上线的中转机场，采用 VMess + Hysteria2 双协议
 
 <img src="assets/og/chaoshihui.png" alt="超实惠加速 ChaoShiHui 机场评测与推荐 · 科学上网" width="720">
 
-> 主打高性价比定价，适合预算有限、追求经济实惠的日常使用
+> 主打高性价比定价的日常机场，并提供 Emby 影视库，花小钱也能追剧观影，追剧党的平价之选。
 
 - **线路类型**：中转 / 直连（以官网为准）
 - **主要协议**：Shadowsocks · Trojan · VLESS
-- **流媒体解锁**：Netflix · ChatGPT
+- **流媒体解锁**：Netflix · ChatGPT · Emby 影视库
 - **覆盖地区**：香港 · 日本 · 美国 等（以官网为准）
 - **起步价**：¥15 起 / 月（包月 / 按量）
-- **最适合**：预算有限日常
+- **最适合**：高性价比 / Emby 影音
 
-从命名与定位看，主打「价格实惠、够用就好」，适合日常轻中度使用；公开独立评测与测速数据有限，具体套餐与稳定性以官网为准，先小额验证。
+定位「价格实惠、够用就好」，适合日常轻中度使用，还提供 Emby 影视库——装上客户端登录即看，稳定、速度快，UP 主在用；公开独立测速数据有限，套餐与稳定性以官网为准，先小额验证。
 
 **完整评测与优惠信息 → [超实惠加速 ChaoShiHui 机场评测](https://air-xvc.github.io/chaoshihui/)**
 
@@ -533,16 +534,16 @@ KTM Cloud 是 2023 年上线的中转机场，采用 VMess + Hysteria2 双协议
 
 <img src="assets/og/qingfeng.png" alt="清风云 QingFeng 机场评测与推荐 · 科学上网" width="720">
 
-> 主打「只月付、不跑路」的轻量级中转机场
+> 主打「只月付、不跑路」的轻量级中转机场，并提供 Emby 影视库，低成本也能追剧观影。
 
 - **线路类型**：公网隧道中转
 - **主要协议**：Shadowsocks · VLESS · Hysteria
-- **流媒体解锁**：Netflix · ChatGPT
+- **流媒体解锁**：Netflix · ChatGPT · Emby 影视库
 - **覆盖地区**：香港 · 日本 · 美国 等
 - **起步价**：见官网 起 （包月 / 按量）
-- **最适合**：新手轻量
+- **最适合**：新手轻量 / Emby 影音
 
-定位入门轻量，公开评测较少，节点质量与稳定性建议自行小额验证；机场行业跑路风险普遍，不建议大额年付。
+定位入门轻量、主打月付不跑路，还提供 Emby 影视库——装上客户端登录即看，稳定、速度快，UP 主在用；公开评测较少，节点与稳定性建议自行小额验证，不建议大额年付。
 
 **完整评测与优惠信息 → [清风云 QingFeng 机场评测](https://air-xvc.github.io/qingfeng/)**
 
@@ -580,6 +581,19 @@ KTM Cloud 是 2023 年上线的中转机场，采用 VMess + Hysteria2 双协议
 
 **完整评测与优惠信息 → [神龙 ShenLong 机场评测](https://air-xvc.github.io/shenlong/)**
 
+## Emby 影音机场推荐
+
+下面这几家在订阅之外还 **内置 / 赠送 Emby 私人影视库**：装上 Emby 客户端、用机场提供的账号登录即可在线看片，相当于自带一个「私人奈飞」，省去自己找片源。它们 **稳定、速度快，UP 主与追剧党常用**。片源、清晰度与可用性以各机场官网实时信息为准。
+
+- 🎬 **[守候 Shouhou](https://air-xvc.github.io/shouhou/)** — 2020 年老牌机场，中转+专线双线路，节点丰富含低倍率，并提供 Emby 私人影视库，装上 Emby 客户端登录即看，追剧党省心。
+- 🎬 **[糖果云 CandyCloud](https://air-xvc.github.io/candycloud/)** — 红杏云旗下分站，IEPL 专线主打晚高峰 4K，并内置 Emby 影视库，追剧党的省心之选。
+- 🎬 **[红杏云 HongXing](https://air-xvc.github.io/hongxing/)** — 糖果云的母站，公网隧道中转 + 全流媒体解锁，还赠送 Emby 影视库，20 元 200G 的高性价比之选。
+- 🎬 **[渔云 YuYun](https://air-xvc.github.io/yuyun/)** — IEPL 专线起步的新锐机场，主打稳定运营与多端定制，全套餐赠送 Emby 影视库，追剧观影一步到位。
+- 🎬 **[好鸭 NiceDuck](https://air-xvc.github.io/niceduck/)** — 2023 年多入口中转机场，套餐自带 Emby 私人影视库
+- 🎬 **[69云 69Yun](https://air-xvc.github.io/yun69/)** — 2022 年专线中转机场，节点覆盖广（含冷门地区），并提供 Emby 影视库，装上客户端登录即看，追剧党友好。
+- 🎬 **[超实惠加速 ChaoShiHui](https://air-xvc.github.io/chaoshihui/)** — 主打高性价比定价的日常机场，并提供 Emby 影视库，花小钱也能追剧观影，追剧党的平价之选。
+- 🎬 **[清风云 QingFeng](https://air-xvc.github.io/qingfeng/)** — 主打「只月付、不跑路」的轻量级中转机场，并提供 Emby 影视库，低成本也能追剧观影。
+
 ## 机场快速对比表
 
 一张表看懂 **机场对比**：线路、协议、解锁能力、起步价与适用场景。适合搜索「机场哪家好」「机场性价比对比」时快速筛选。
@@ -588,25 +602,25 @@ KTM Cloud 是 2023 年上线的中转机场，采用 VMess + Hysteria2 双协议
 | --- | --- | --- | --- | --- | --- |
 | [Mitce](https://air-xvc.github.io/mitce/) | 直连（部分 BGP 中转） | VLESS+Reality · Hysteria2 | Netflix · Disney+ · ChatGPT | ¥4 / 100G | 性价比 / 新手 |
 | [西部数据](https://air-xvc.github.io/westdata/) | IEPL/IPLC 全专线 | Trojan | Netflix · Disney+ · ChatGPT | ¥17 / 200G | 稳定专线党 |
-| [守候](https://air-xvc.github.io/shouhou/) | 公网中转 + IPLC 专线 | Shadowsocks | Netflix · Disney+ · ChatGPT | ¥15 / 月 | 稳健老用户 |
+| [守候](https://air-xvc.github.io/shouhou/) | 公网中转 + IPLC 专线 | Shadowsocks | Netflix · Disney+ · ChatGPT · Emby 影视库 | ¥15 / 月 | 稳健老用户 / Emby 影音 |
 | [糖果云](https://air-xvc.github.io/candycloud/) | IEPL 专线 | Shadowsocks · V2Ray | Netflix · ChatGPT · Emby 影视库 | ¥28 / 100G | 影视 / 追剧 |
 | [红杏云](https://air-xvc.github.io/hongxing/) | 公网隧道中转 | Trojan · Hysteria2 | Netflix · Disney+ · ChatGPT · Emby 影视库 | ¥20 / 200G | 流媒体 / 性价比 |
 | [自由猫](https://air-xvc.github.io/freecat/) | MPTCP 多路径中转 | Shadowsocks · Trojan · VLESS | Netflix · Disney+ · ChatGPT | ¥6 / 月 | 日常主力 |
 | [淘气兔](https://air-xvc.github.io/taoqitu/) | 中转 + IEPL 专线 | Shadowsocks · Trojan | Netflix · ChatGPT | ¥7.8 / 月 | 联通移动用户 |
-| [渔云](https://air-xvc.github.io/yuyun/) | IEPL 专线 + 中转 | VLESS · Hysteria2 | Netflix · Disney+ · ChatGPT | ¥9 / 月 | 长期稳定党 |
+| [渔云](https://air-xvc.github.io/yuyun/) | IEPL 专线 + 中转 | VLESS · Hysteria2 | Netflix · Disney+ · ChatGPT · Emby 影视库 | ¥9 / 月 | 长期稳定 / Emby 影音 |
 | [好鸭](https://air-xvc.github.io/niceduck/) | 多入口隧道中转 | Shadowsocks | Netflix · Disney+ · YouTube · ChatGPT · Emby 影视库 | ¥12 / 月 | 追剧兼解锁 |
 | [流量光](https://air-xvc.github.io/llguang/) | BGP 中转 + 专线可选 | Trojan · Shadowsocks | Netflix · Disney+ · HBO · Spotify · TikTok · ChatGPT | ¥9.9 / 月 | 流媒体重度 |
 | [快雷GO](https://air-xvc.github.io/kuailei/) | IEPL 专线 + 直连 | AnyTLS · VLESS | Netflix · Disney+ · ChatGPT · TikTok | ¥15 / 月 110G | 晚高峰 / 速度 |
 | [NiceCloud](https://air-xvc.github.io/nicecloud/) | 公网中转隧道 | Shadowsocks · SSR | Netflix · Disney+ · ChatGPT · TikTok | ¥12 / 月起 | 性价比 / 灵活流量 |
 | [OuO](https://air-xvc.github.io/ouo/) | 公网隧道中转 | Shadowsocks | Netflix · Disney+ · YouTube · TikTok · ChatGPT | ¥10 / 月 | 多地区解锁 |
-| [69云](https://air-xvc.github.io/yun69/) | 专线中转 | Shadowsocks · VMess | Netflix · Disney+ · HBO · ChatGPT | ¥9.9 / 月 | 冷门地区/备用 |
+| [69云](https://air-xvc.github.io/yun69/) | 专线中转 | Shadowsocks · VMess | Netflix · Disney+ · HBO · ChatGPT · Emby 影视库 | ¥9.9 / 月 | 冷门地区 / Emby 影音 |
 | [蛋挞机场](https://air-xvc.github.io/danta/) | 公网隧道中转 + IEPL 专线 | Shadowsocks | Netflix · Disney+ · YouTube Premium · ChatGPT · TikTok | ¥7 / 月 | 多入口进阶 |
 | [KTM Cloud](https://air-xvc.github.io/ktmcloud/) | CN2/BGP 中转 + 专线 | VMess · Hysteria2 | Netflix · Disney+ · ChatGPT · TikTok | ¥15 / 月 300G | 大流量 / 性价比 |
 | [牛逼](https://air-xvc.github.io/niubi/) | 公网中转 + 直连混合 | Shadowsocks · VMess · Trojan | Netflix · Disney+ · ChatGPT | ¥7.4 / 月 | 大流量党 |
 | [雪山机场](https://air-xvc.github.io/xueshan/) | 家宽 / 中转线路 | Shadowsocks · Trojan · Hysteria2 · VLESS | Netflix · Disney+ · ChatGPT | ¥9.9 / 月 | 日常全能 |
 | [游隼云](https://air-xvc.github.io/yousun/) | 三网优化中转 | Shadowsocks · Trojan · Hysteria2 | Netflix · Disney+ · ChatGPT | ¥0.03 / GB | 按量轻用户 |
 | [Hneko云机场](https://air-xvc.github.io/hneko/) | 公网隧道中转 | Shadowsocks · Trojan · VMess | Netflix · ChatGPT | ¥7 / 月 | 大流量党 |
-| [超实惠加速](https://air-xvc.github.io/chaoshihui/) | 中转 / 直连（以官网为准） | Shadowsocks · Trojan · VLESS | Netflix · ChatGPT | ¥15 / 月 | 预算有限日常 |
+| [超实惠加速](https://air-xvc.github.io/chaoshihui/) | 中转 / 直连（以官网为准） | Shadowsocks · Trojan · VLESS | Netflix · ChatGPT · Emby 影视库 | ¥15 / 月 | 高性价比 / Emby 影音 |
 | [凌云加速](https://air-xvc.github.io/lingyun/) | 中转（线路细节未公开确认） | Shadowsocks · Trojan · VMess | Netflix · Disney+ · ChatGPT | ¥10.9 / 月 | 低价尝鲜 |
 | [极速机场](https://air-xvc.github.io/jisu/) | 中转（多线路） | Shadowsocks · Trojan · Hysteria2 | Netflix · Disney+ · ChatGPT | 见官网  | 预算优先入门 |
 | [良心云](https://air-xvc.github.io/liangxin/) | AWS 直连线路 | VLESS · Hysteria2 | Netflix · Disney+ · ChatGPT · TikTok | ¥2 / 月 | 低价尝鲜党 |
@@ -614,7 +628,7 @@ KTM Cloud 是 2023 年上线的中转机场，采用 VMess + Hysteria2 双协议
 | [顶级机场](https://air-xvc.github.io/dingji/) | 公网直连 | Hysteria2 · VLESS | YouTube · ChatGPT | ¥5 / 月 | 价格敏感重流量 |
 | [赔钱机场](https://air-xvc.github.io/peiqian/) | 全直连 / 部分中转 | Shadowsocks · Trojan · VMess · VLESS · Hysteria2 | Netflix · ChatGPT · TikTok | ¥1.99 / 月 | 极致低价备用 |
 | [卷王机场](https://air-xvc.github.io/juanwang/) | 公网隧道中转 | Hysteria · Trojan · VLESS · VMess | ChatGPT · TikTok | 免费试用  | 免费试水 |
-| [清风云](https://air-xvc.github.io/qingfeng/) | 公网隧道中转 | Shadowsocks · VLESS · Hysteria | Netflix · ChatGPT | 见官网  | 新手轻量 |
+| [清风云](https://air-xvc.github.io/qingfeng/) | 公网隧道中转 | Shadowsocks · VLESS · Hysteria | Netflix · ChatGPT · Emby 影视库 | 见官网  | 新手轻量 / Emby 影音 |
 | [飞狗](https://air-xvc.github.io/feigou/) | 公网隧道中转 | Shadowsocks · Trojan · VMess | Netflix · YouTube · ChatGPT | 见官网  | 低价备用 |
 | [神龙](https://air-xvc.github.io/shenlong/) | 中转 / 专线（以官网为准） | Shadowsocks · VMess · Trojan | Netflix · ChatGPT | ¥9 / 月 | 小众探索 |
 
@@ -622,12 +636,12 @@ KTM Cloud 是 2023 年上线的中转机场，采用 VMess + Hysteria2 双协议
 
 - **便宜稳定，日常刷视频 + 挂 AI** → 选 [Mitce](https://air-xvc.github.io/mitce/)
 - **要低延迟专线、常年稳定不掉线** → 选 [西部数据](https://air-xvc.github.io/westdata/)
-- **想要运营多年、节点丰富可长期用** → 选 [守候](https://air-xvc.github.io/shouhou/)
+- **运营多年可长期用，还想要 Emby 影视库追剧** → 选 [守候](https://air-xvc.github.io/shouhou/)
 - **重度追剧党，想要 Emby 影视库** → 选 [糖果云](https://air-xvc.github.io/candycloud/)
 - **便宜大流量看剧 + 全流媒体解锁** → 选 [红杏云](https://air-xvc.github.io/hongxing/)
 - **晚高峰更稳的日常主力机场** → 选 [自由猫](https://air-xvc.github.io/freecat/)
 - **联通 / 移动用户要中转+专线混合** → 选 [淘气兔](https://air-xvc.github.io/taoqitu/)
-- **要 IEPL 专线、愿意先验证再长期** → 选 [渔云](https://air-xvc.github.io/yuyun/)
+- **要 IEPL 专线，还想套餐白送 Emby 影视库** → 选 [渔云](https://air-xvc.github.io/yuyun/)
 - **追剧 + 解锁，还想要 Emby** → 选 [好鸭](https://air-xvc.github.io/niceduck/)
 - **Netflix/Disney+/HBO 等全解锁重度用户** → 选 [流量光](https://air-xvc.github.io/llguang/)
 - **冲晚高峰速度、接受新站先月付** → 选 [快雷GO](https://air-xvc.github.io/kuailei/)
