@@ -40,7 +40,8 @@ window.SITE = {
     "lvpn": "https://s.rtxk.us/s/bnwjgrx",
     "shunchang": "https://t.rtxk.us/t/k2pajrb",
     "tifa": "https://i.rtxk.us/i/muxcy6r",
-    "wugui": "https://s.rtxk.us/s/5krgzu4"
+    "wugui": "https://s.rtxk.us/s/5krgzu4",
+    "kuajing": "https://s.rtxk.us/s/4dhmqvu"
   },
   code: {
     "mitce": "like20",
@@ -78,7 +79,8 @@ window.SITE = {
     "lvpn": "",
     "shunchang": "",
     "tifa": "",
-    "wugui": ""
+    "wugui": "",
+    "kuajing": ""
   }
 };
 
