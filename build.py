@@ -22,6 +22,24 @@ B = SITE["base"].rstrip("/")
 UPDATED = SITE.get("updated", "2026-07")
 esc = html.escape
 
+# 从 assets/config.js 读推广链接映射，把真实邀请链接直接写进按钮 href（不再只靠 config.js 运行时注入，
+# 这样静态 HTML 里就带真实短链：hover 可见、不依赖 JS、任何域名/缓存都生效；config.js 仍作运行时兜底）。
+def load_aff():
+    txt = open(os.path.join(BASE, "assets", "config.js"), encoding="utf-8").read()
+    m = re.search(r"aff\s*:\s*\{(.*?)\}", txt, re.S)
+    aff = {}
+    if m:
+        for k, v in re.findall(r'"([^"]+)"\s*:\s*"([^"]*)"', m.group(1)):
+            if v.strip():
+                aff[k] = v.strip()
+    return aff
+
+AFF = load_aff()
+def aff_href(slug, fallback):
+    return esc(AFF[slug]) if AFF.get(slug) else fallback
+def aff_tgt(slug):
+    return ' target="_blank"' if AFF.get(slug) else ''
+
 # ----------------------------------------------------------------------------- helpers
 def chips(items, cls=""):
     return "".join('<span class="chip %s">%s</span>' % (cls, esc(x)) for x in items)
@@ -64,7 +82,7 @@ def nav_html():
 '<stop offset="0" stop-color="#35E0D4"/><stop offset=".5" stop-color="#7E7BFF"/><stop offset="1" stop-color="#FF6AD5"/>'
 '</linearGradient></defs><circle cx="20" cy="20" r="18" stroke="url(#bg1)" stroke-width="1.6" opacity=".5"/>'
 '<path d="M20 5 L26 32 L20 27 L14 32 Z" fill="url(#bg1)"/><circle cx="20" cy="20" r="2.4" fill="#fff"/></svg>'
-'<span>AIRXVC<small>领航 · 机场推荐榜</small></span></a>'
+'<span>机场推荐榜<small>AIRXVC 领航 · 专业实测</small></span></a>'
 '<button class="nav-toggle" aria-label="展开菜单" aria-expanded="false">☰</button>'
 '<div class="nav-links">'
 '<a href="/#board">机场榜单</a><a href="/#emby">Emby影音</a><a href="/airports/">机场大全</a>'
@@ -274,13 +292,13 @@ def render_detail(a):
     out += ('<aside class="buybox"><div class="price-lead">起步参考价</div>'
             '<div class="price-big">%s<span>%s</span></div>'
             '<div class="tagrow" style="margin:12px 0 16px">%s</div>'
-            '<a class="btn btn-primary btn-block btn-lg" data-aff="%s" href="#plans" rel="nofollow sponsored noopener">前往%s官网 ↗</a>'
+            '<a class="btn btn-primary btn-block btn-lg" data-aff="%s" href="%s"%s rel="nofollow sponsored noopener">前往%s官网 ↗</a>'
             '<a class="btn btn-ghost btn-block" href="#plans" style="margin-top:10px">查看套餐</a>'
             '<div data-codebox><div class="price-lead" style="margin-top:18px">专属优惠码</div>'
             '<div class="codebox"><code data-code="%s">—</code><button class="copybtn" type="button">复制</button></div></div>'
             '<p class="muted" style="font-size:12px;margin-top:14px">通过本站链接注册不额外收费；价格 / 优惠以官网为准。</p></aside>'
             ) % (esc(a["price_from"]), esc(a["price_unit"]), chips(a["unlock"], "on"),
-                 slug, esc(name), slug)
+                 slug, aff_href(slug, "#plans"), aff_tgt(slug), esc(name), slug)
     out += '</div>'  # hero-detail
     # spec strip
     out += '<dl class="spec" style="margin-top:36px">%s</dl>' % spec_html
@@ -291,9 +309,9 @@ def render_detail(a):
     out += ('<section class="section-sm wrap"><div class="band"><span class="eyebrow center">准备起飞</span>'
             '<h2>觉得 %s 合适？<span class="grad-text">月付先试一档</span></h2>'
             '<p>新机场先小额验证再续费，试错成本很低。价格与优惠以官网实时为准。</p>'
-            '<a class="btn btn-primary btn-lg" data-aff="%s" href="#plans" rel="nofollow sponsored noopener">前往 %s 官网 ↗</a>'
+            '<a class="btn btn-primary btn-lg" data-aff="%s" href="%s"%s rel="nofollow sponsored noopener">前往 %s 官网 ↗</a>'
             '<div style="margin-top:16px"><a class="chip" href="/airports/">← 返回机场大全</a></div></div></section>'
-            ) % (esc(name), slug, esc(name))
+            ) % (esc(name), slug, aff_href(slug, "#plans"), aff_tgt(slug), esc(name))
     out += '</main>'
     out += footer_html()
     out += SCRIPTS
@@ -361,10 +379,10 @@ def render_board():
             '<div class="rank-main"><h3>%s %s %s</h3><p class="tagline">%s</p><div class="tagrow">%s</div></div>'
             '<div class="rank-side"><div class="price"><b>%s</b>起 %s</div>'
             '<a class="btn btn-aurora btn-block" href="/%s/">查看评测</a>'
-            '<a class="btn btn-ghost btn-block" data-aff="%s" href="/%s/#plans">前往官网 ↗</a></div></article>'
+            '<a class="btn btn-ghost btn-block" data-aff="%s" href="%s"%s rel="nofollow sponsored noopener">前往官网 ↗</a></div></article>'
             % (best, gate, esc(a["name"]), esc(a["en"]) if a["en"] != a["name"] else "", label,
                esc(a["tagline"]), tags, esc(a["price_from"]), esc(a["price_unit"]),
-               a["slug"], a["slug"], a["slug"]))
+               a["slug"], a["slug"], aff_href(a["slug"], "/%s/#plans" % a["slug"]), aff_tgt(a["slug"])))
     return "\n".join(out)
 
 def render_pick():

@@ -35,13 +35,18 @@ window.SITE = {
     "chaoshihui": "https://s.rtxk.us/s/c5n9usc",
     "nicecloud": "https://s.rtxk.us/s/u879gws",
     "kuailei": "https://t.rtxk.us/t/cp2d6j8",
-    "ktmcloud": "https://i.rtxk.us/i/fs2n9ra"
+    "ktmcloud": "https://i.rtxk.us/i/fs2n9ra",
+    "tapcloud": "https://s.rtxk.us/s/5qv7zcn",
+    "lvpn": "https://s.rtxk.us/s/bnwjgrx",
+    "shunchang": "https://t.rtxk.us/t/k2pajrb",
+    "tifa": "https://i.rtxk.us/i/muxcy6r",
+    "wugui": "https://s.rtxk.us/s/5krgzu4"
   },
   code: {
     "mitce": "like20",
     "candycloud": "Candytally",
     "hongxing": "lu88",
-    "westdata": "",
+    "westdata": "WD-DDR6",
     "niubi": "",
     "liangxin": "",
     "shouhou": "",
@@ -68,7 +73,12 @@ window.SITE = {
     "chaoshihui": "",
     "nicecloud": "",
     "kuailei": "",
-    "ktmcloud": ""
+    "ktmcloud": "",
+    "tapcloud": "xiaoqi",
+    "lvpn": "",
+    "shunchang": "",
+    "tifa": "",
+    "wugui": ""
   }
 };
 

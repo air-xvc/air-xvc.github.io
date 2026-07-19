@@ -17,51 +17,24 @@ CYAN = (53, 224, 212)
 def hx(h):
     h = h.lstrip("#"); return tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
 
-# ---- fonts (Noto Sans CJK SC / Windows 微软雅黑 fallback) ----
+# ---- fonts (Noto Sans CJK SC) ----
 def load_cjk(bold=False):
-    candidates = [
-        "/usr/share/fonts/opentype/noto/NotoSansCJK-%s.ttc" % ("Bold" if bold else "Regular"),
-        "/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf",
-        r"C:\Windows\Fonts\msyhbd.ttc" if bold else r"C:\Windows\Fonts\msyh.ttc",
-        r"C:\Windows\Fonts\msyh.ttc",
-        r"C:\Windows\Fonts\simhei.ttf",
-        r"C:\Windows\Fonts\simsun.ttc",
-    ]
-    for f in candidates:
-        if not os.path.exists(f):
-            continue
+    f = "/usr/share/fonts/opentype/noto/NotoSansCJK-%s.ttc" % ("Bold" if bold else "Regular")
+    if os.path.exists(f):
         for idx in range(12):
             try:
                 ft = ImageFont.truetype(f, 40, index=idx)
-                name = ft.getname()[0]
-                if "SC" in name or "YaHei" in name or "Hei" in name or "Sun" in name or idx == 0:
+                if "SC" in ft.getname()[0]:
                     return f, idx
             except Exception:
-                if idx == 0:
-                    break
-                continue
-        try:
-            ImageFont.truetype(f, 40)
-            return f, 0
-        except Exception:
-            continue
-    # last resort: PIL default (Latin only)
-    return None, 0
+                break
+        return f, 0
+    return "/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf", 0
 
 REG_F, REG_I = load_cjk(False)
 BLD_F, BLD_I = load_cjk(True)
 def font(size, bold=False):
-    path = BLD_F if bold else REG_F
-    idx = BLD_I if bold else REG_I
-    if not path:
-        return ImageFont.load_default()
-    try:
-        return ImageFont.truetype(path, size, index=idx)
-    except Exception:
-        try:
-            return ImageFont.truetype(path, size)
-        except Exception:
-            return ImageFont.load_default()
+    return ImageFont.truetype(BLD_F if bold else REG_F, size, index=(BLD_I if bold else REG_I))
 
 def grad_h(w, h, c1, c2):
     img = Image.new("RGB", (w, h)); d = ImageDraw.Draw(img)
