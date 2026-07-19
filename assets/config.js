@@ -41,7 +41,8 @@ window.SITE = {
     "shunchang": "https://t.rtxk.us/t/k2pajrb",
     "tifa": "https://i.rtxk.us/i/muxcy6r",
     "wugui": "https://s.rtxk.us/s/5krgzu4",
-    "kuajing": "https://s.rtxk.us/s/4dhmqvu"
+    "kuajing": "https://s.rtxk.us/s/4dhmqvu",
+    "m78star": "https://i.rtxk.us/i/n3p4cbs"
   },
   code: {
     "mitce": "like20",
@@ -80,7 +81,8 @@ window.SITE = {
     "shunchang": "",
     "tifa": "",
     "wugui": "",
-    "kuajing": ""
+    "kuajing": "",
+    "m78star": ""
   }
 };
 
