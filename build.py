@@ -40,6 +40,64 @@ def aff_href(slug, fallback):
 def aff_tgt(slug):
     return ' target="_blank"' if AFF.get(slug) else ''
 
+# ----------------------------------------------------------------------------- AI 订阅指南引流（姊妹站）
+# 机场用户与 AI 订阅用户高度重合：很多人买机场就是为了流畅用 ChatGPT / Claude / Gemini，
+# 「能连上」之后往往卡在「会员怎么开、国内卡付不了、代充值踩坑」——正好由姊妹站 AI 订阅指南承接。
+# 三卡分别精准直达对应指南页；底部主按钮进指南首页（含 30 秒选择器）。改域名/文案只需改这一处。
+AI_GUIDE = "https://555735.xyz"
+AI_CARDS = [
+    {"key": "gemini", "name": "Gemini", "c1": "#4989F5", "c2": "#9168F0", "sym": "✦",
+     "badge": "长周期最划算", "role": "Google 生态 · 多模态 · 长周期",
+     "chips": ["12 / 18 个月", "CDK 秒发", "成品账号"], "go": "看 Gemini 怎么买最省"},
+    {"key": "chatgpt", "name": "ChatGPT", "c1": "#10A37F", "c2": "#19C79A", "sym": "✺",
+     "badge": "用得最广", "role": "通用生产力 · 图像 · Codex 编程",
+     "chips": ["Plus / Pro", "代充值", "Codex 已接码"], "go": "看 ChatGPT 怎么开通"},
+    {"key": "claude", "name": "Claude", "c1": "#E8825A", "c2": "#D96C43", "sym": "✳",
+     "badge": "码农刚需", "role": "代码 · 长文本 · Claude Code",
+     "chips": ["Pro / Max", "代充值", "独享成品号"], "go": "看 Claude 怎么充值"},
+]
+
+def ai_promo_html():
+    cards = []
+    for c in AI_CARDS:
+        chip_html = "".join('<span class="chip">%s</span>' % esc(x) for x in c["chips"])
+        cards.append(
+            '<a class="ai-card %s" href="%s/guides/%s.html" target="_blank" rel="noopener sponsored" '
+            'aria-label="查看 %s 订阅购买指南">'
+            '<span class="ai-badge">%s</span>'
+            '<span class="ai-logo" style="--c1:%s;--c2:%s" aria-hidden="true">%s</span>'
+            '<h3>%s</h3><p class="ai-role">%s</p>'
+            '<div class="tagrow">%s</div>'
+            '<span class="ai-go">%s →</span></a>'
+            % (c["key"], AI_GUIDE, c["key"], esc(c["name"]), esc(c["badge"]),
+               c["c1"], c["c2"], c["sym"], esc(c["name"]), esc(c["role"]), chip_html, esc(c["go"])))
+    return (
+        '<section class="section wrap ai-promo" id="ai-guide" aria-label="AI 订阅指南推广">'
+        '<div class="ai-shell">'
+        '<div class="ai-head center">'
+        '<span class="eyebrow center">🤖 AI 订阅指南</span>'
+        '<h2>机场帮你连上 AI，<span class="grad-text">会员别买贵了</span></h2>'
+        '<p>ChatGPT、Claude、Gemini 官方订阅又贵、国内卡还常常付不了？代充值、成品号、CDK 到底怎么选，'
+        '「AI 订阅指南」一篇讲清——<b>先看懂再下单，同样的会员少花一半</b>。</p></div>'
+        '<div class="ai-grid">%s</div>'
+        '<div class="ai-foot">'
+        '<div class="ai-foot-txt"><b>拿不准选哪家？</b>指南里有 30 秒选择器，回答两个问题就帮你选对产品和档位，再进商城下单。</div>'
+        '<a class="btn btn-primary btn-lg" href="%s" target="_blank" rel="noopener sponsored">进入 AI 订阅指南 ↗</a>'
+        '</div></div></section>' % ("\n".join(cards), AI_GUIDE)
+    )
+
+def ai_banner_html():
+    # 详情页上部紧凑钩子条：放在规格表后、正文前，填补留白，新标签打开保留机场页
+    return (
+        '<div class="wrap" style="margin-top:30px"><a class="ai-banner" href="%s" target="_blank" '
+        'rel="noopener sponsored" aria-label="AI 订阅指南：ChatGPT、Claude、Gemini 怎么买更省">'
+        '<span class="ai-banner-dots" aria-hidden="true"><i style="--c:#4989F5"></i>'
+        '<i style="--c:#10A37F"></i><i style="--c:#E8825A"></i></span>'
+        '<span class="ai-banner-txt"><b>选好机场，AI 会员也别买贵了</b> '
+        'ChatGPT / Claude / Gemini 代充值、成品号、CDK 一篇看懂，同样会员少花一半</span>'
+        '<span class="ai-banner-cta">AI 订阅指南 ↗</span></a></div>'
+    ) % AI_GUIDE
+
 # ----------------------------------------------------------------------------- helpers
 def chips(items, cls=""):
     return "".join('<span class="chip %s">%s</span>' % (cls, esc(x)) for x in items)
@@ -87,6 +145,7 @@ def nav_html():
 '<div class="nav-links">'
 '<a href="/#board">机场榜单</a><a href="/#emby">Emby影音</a><a href="/airports/">机场大全</a>'
 '<a href="/#guide">怎么选</a><a href="/#compare">参数对比</a><a href="/#faq">常见问题</a>'
+'<a class="nav-ai" href="' + AI_GUIDE + '" target="_blank" rel="noopener sponsored">AI订阅 ↗</a>'
 '<a class="btn btn-primary nav-cta" href="/airports/">全部机场</a></div></nav></header>')
 
 def footer_html():
@@ -302,9 +361,13 @@ def render_detail(a):
     out += '</div>'  # hero-detail
     # spec strip
     out += '<dl class="spec" style="margin-top:36px">%s</dl>' % spec_html
+    # AI 引流钩子条：规格表后、正文前，填补此处留白
+    out += ai_banner_html()
     out += '</section>'
     # doc
     out += '<section class="section wrap"><div class="doc">%s<div class="prose">%s</div></div></section>' % (toc_html, prose)
+    # AI 订阅指南引流专区（姊妹站）
+    out += ai_promo_html()
     # cta band
     out += ('<section class="section-sm wrap"><div class="band"><span class="eyebrow center">准备起飞</span>'
             '<h2>觉得 %s 合适？<span class="grad-text">月付先试一档</span></h2>'
@@ -356,7 +419,10 @@ def render_hub():
             '<p>我们实测收录的机场都在这里，按需求点进去看完整评测。共 %d 家，持续增加中。</p></div>' % len(AIRPORTS))
     out += '<div class="grid-3">%s</div>' % "\n".join(cards)
     out += ('<div style="text-align:center;margin-top:44px"><a class="btn btn-ghost" href="/#guide">还不知道怎么选？看选购指南 →</a></div>')
-    out += '</section></main>'
+    out += '</section>'
+    # AI 订阅指南引流专区（姊妹站）
+    out += ai_promo_html()
+    out += '</main>'
     out += footer_html()
     out += SCRIPTS
     return out
@@ -735,8 +801,15 @@ def main():
     idx = inject(idx, "WALL", render_wall())
     idx = inject(idx, "FOOTER_AIRPORTS", render_footer_airports())
     idx = inject(idx, "COUNT", str(len(AIRPORTS)))
+    idx = inject(idx, "AIPROMO", ai_promo_html())
     open(idx_path, "w", encoding="utf-8").write(idx)
     print("  ✓ index.html (injected)")
+    # 404 页也注入同一引流专区，保持「全站每页都挂」
+    p404 = os.path.join(BASE, "404.html")
+    t404 = open(p404, encoding="utf-8").read()
+    t404 = inject(t404, "AIPROMO", ai_promo_html())
+    open(p404, "w", encoding="utf-8").write(t404)
+    print("  ✓ 404.html (injected)")
     print("Done.")
 
 
