@@ -213,7 +213,7 @@ def nav_html():
 '<button class="nav-toggle" aria-label="展开菜单" aria-expanded="false">☰</button>'
 '<div class="nav-links">'
 '<a href="/#board">机场榜单</a><a href="/#emby">Emby影音</a><a href="/airports/">机场大全</a>'
-'<a href="/#guide">怎么选</a><a href="/#compare">参数对比</a><a href="/#faq">常见问题</a>'
+'<a href="/#guide">怎么选</a><a href="/#compare">参数对比</a>'
 '<a class="nav-ai" href="' + AI_GUIDE + '" target="_blank" rel="noopener sponsored">AI订阅 ↗</a>'
 '<a class="nav-blog" href="' + BLOG + '" target="_blank" rel="noopener">攻略博客 ↗</a>'
 '<a class="btn btn-primary nav-cta" href="/airports/">全部机场</a></div></nav></header>')
@@ -231,7 +231,7 @@ def footer_html():
 '<p style="color:var(--ink-2);font-size:14px;max-width:34ch">' + esc(SITE["tagline"]) + '</p></div>'
 '<div><h5>机场评测</h5>' + links + '</div>'
 '<div><h5>指南</h5><a href="/#guide">怎么选机场</a><a href="/#compare">参数对比</a>'
-'<a href="/airports/">机场大全</a><a href="/#faq">常见问题</a></div></div>'
+'<a href="/airports/">机场大全</a></div></div>'
 '<div class="disc"><p><b>免责声明：</b>本站为第三方信息与推荐平台，非任何机场官方；页面内含推广链接，'
 '若你通过链接注册或购买，我们可能获得一定佣金，但<b>不会增加你的任何成本</b>。'
 '各机场的线路、价格、优惠码可能随时变动，请以对应官网实时信息为准。'
