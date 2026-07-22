@@ -602,3 +602,16 @@ table.cmp td.mono{font-family:var(--font-mono);color:var(--ink-2)}
     max-height:82vh;overflow:auto;border-radius:22px 22px 0 0;transform:translateY(100%)}
   .hd-dock.is-open .hd-dock-panel{transform:translateY(0)}
 }
+
+/* ≥1760：右侧留白够宽 → 花渡「常驻最右留白」模式（用户 2026-07-22 选定 B 方案）：
+   隐藏栏内 .hd-rail、正文加宽、面板贴右缘常驻占满留白；无需把手/悬停/遮罩，纯 CSS 不依赖 JS。
+   面板宽度 calc 已扣右边距，物理在留白内、零遮挡正文。窄屏(≤1759)自动退回栏内 rail + 滚过后的把手。 */
+@media (min-width:1760px){
+  .doc{grid-template-columns:190px minmax(0,1fr)}
+  .doc .hd-rail{display:none}
+  .doc .prose{max-width:900px}
+  .hd-dock{top:88px;transform:none;opacity:1;visibility:visible;pointer-events:auto}
+  .hd-dock .hd-handle,.hd-dock .hd-panel-close{display:none}
+  .hd-dock-panel{margin-right:clamp(18px,1.6vw,30px);max-height:calc(100vh - 48px);overflow:auto;
+    opacity:1;visibility:visible;pointer-events:auto;transform:none}
+}
