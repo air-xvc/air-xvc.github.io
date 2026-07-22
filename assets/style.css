@@ -531,3 +531,74 @@ table.cmp td.mono{font-family:var(--font-mono);color:var(--ink-2)}
   .hd-rail{position:static;margin:0 0 26px}
 }
 @media (max-width:620px){.hd-home-grid{grid-template-columns:1fr}}
+
+/* ===== 详情页右缘悬浮件 .hd-dock（fixed 把手 → 悬停/点击展开｜与 .hd-rail 同源·IO 互斥接棒·零遮挡） ===== */
+/* 默认隐身；app.js 在「滚过 in-flow .hd-rail」后加 .is-live 现身，.is-open 控面板展开。z-index 让位 nav(50)。 */
+.hd-dock{position:fixed;top:50%;right:0;z-index:46;display:flex;flex-direction:row-reverse;align-items:center;
+  transform:translateY(-50%) translateX(112%);opacity:0;visibility:hidden;pointer-events:none;
+  transition:transform .5s cubic-bezier(.16,1,.3,1),opacity .35s ease,visibility .35s}
+.hd-dock.is-live{transform:translateY(-50%) translateX(0);opacity:1;visibility:visible;pointer-events:auto}
+.hd-dock.is-open{z-index:80}
+@media (prefers-reduced-motion:reduce){.hd-dock{transition:opacity .2s}.hd-dock.is-live{transform:translateY(-50%)}}
+
+/* 把手：贴右缘竖条·彼岸花暖渐变（金→品红→微紫，刻意避开 AI 专区青紫，双引流不撞脸） */
+.hd-handle{position:relative;flex:none;width:42px;min-height:150px;cursor:pointer;border:0;
+  border-radius:16px 0 0 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:9px;padding:16px 0 14px;color:#2a0f1e;
+  background:linear-gradient(165deg,var(--amber) 0%,var(--magenta) 58%,#c65cff 100%);
+  box-shadow:0 18px 40px -14px rgba(255,106,213,.7),inset 0 1px 0 rgba(255,255,255,.35);
+  writing-mode:vertical-rl;text-orientation:upright;
+  font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:.16em;
+  transition:width .22s ease,filter .22s ease,box-shadow .22s ease}
+.hd-handle .ic,.hd-handle .go{writing-mode:horizontal-tb}
+.hd-handle .ic{font-size:18px;line-height:1}
+.hd-handle .go{font-size:12px;opacity:.85}
+.hd-handle::after{content:"";position:absolute;inset:-2px 0;border-radius:inherit;z-index:-1;
+  background:inherit;filter:blur(11px);opacity:.4;animation:hd-breathe 3.6s ease-in-out infinite}
+@keyframes hd-breathe{0%,100%{opacity:.3}50%{opacity:.6}}
+@media (prefers-reduced-motion:reduce){.hd-handle::after{animation:none}}
+.hd-handle:hover,.hd-handle:focus-visible{width:48px;filter:brightness(1.06);
+  box-shadow:0 22px 52px -14px rgba(255,106,213,.92)}
+
+/* 面板：默认=宽屏(≥1760) in-gutter 模式，宽度被 --wrap 的 calc 钳在右空白内（已扣把手 42+间距，零啃正文） */
+.hd-dock-panel{position:relative;flex:none;margin-right:10px;
+  width:min(320px,calc((100vw - var(--wrap))/2 - 64px));
+  opacity:0;visibility:hidden;pointer-events:none;transform:translateX(24px);
+  padding:20px 20px 18px;border-radius:20px;isolation:isolate;overflow:hidden;
+  border:1px solid rgba(255,106,213,.24);
+  background:radial-gradient(135% 80% at 100% -8%,rgba(255,106,213,.15),transparent 58%),
+    radial-gradient(120% 90% at -12% 112%,rgba(126,123,255,.13),transparent 56%),var(--panel);
+  box-shadow:0 40px 90px -40px rgba(255,106,213,.62),inset 0 1px 0 rgba(255,255,255,.05);
+  transition:transform .34s cubic-bezier(.16,1,.3,1),opacity .28s ease,visibility .28s}
+.hd-dock.is-open .hd-dock-panel{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(0)}
+.hd-dock-panel .hd-group{margin-top:14px}
+.hd-panel-close{position:absolute;top:12px;right:12px;width:30px;height:30px;border-radius:9px;cursor:pointer;
+  border:1px solid var(--brd);background:var(--panel);color:var(--ink-2);font-size:16px;line-height:1;
+  display:grid;place-items:center;transition:.16s ease}
+.hd-panel-close:hover{color:var(--magenta);border-color:var(--magenta)}
+
+/* 遮罩：仅窄屏模态/底 sheet 用；宽屏 in-gutter 不需要（面板在空白里，不压正文） */
+.hd-scrim{position:fixed;inset:0;z-index:78;background:rgba(4,6,16,.55);backdrop-filter:blur(2px);
+  opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s}
+.hd-scrim.is-on{opacity:1;visibility:visible}
+@media (min-width:1760px){.hd-scrim{display:none}}
+
+/* ≤1759：右侧空白 <300px → 点击展开为右侧模态抽屉 + 遮罩（用户主动触发，不常驻压正文） */
+@media (max-width:1759px){
+  .hd-dock-panel{position:fixed;top:0;right:0;bottom:0;margin:0;width:min(360px,calc(100vw - 44px));
+    max-height:100vh;overflow:auto;border-radius:20px 0 0 20px;transform:translateX(100%)}
+  .hd-dock.is-open .hd-dock-panel{transform:translateX(0)}
+}
+/* ≤760：竖条把手退化为右下角圆形 FAB，展开为底部 sheet */
+@media (max-width:760px){
+  .hd-dock{top:auto;bottom:calc(18px + env(safe-area-inset-bottom,0px));right:16px;
+    flex-direction:column;transform:translateX(160%)}
+  .hd-dock.is-live{transform:translateX(0)}
+  .hd-handle{width:56px;min-height:56px;border-radius:50%;writing-mode:horizontal-tb;
+    letter-spacing:0;font-size:0;padding:0;gap:0}
+  .hd-handle .ic{font-size:24px}
+  .hd-handle .go{display:none}
+  .hd-dock-panel{position:fixed;left:0;right:0;bottom:0;top:auto;width:100%;margin:0;
+    max-height:82vh;overflow:auto;border-radius:22px 22px 0 0;transform:translateY(100%)}
+  .hd-dock.is-open .hd-dock-panel{transform:translateY(0)}
+}

@@ -62,3 +62,52 @@
   var y = document.querySelector("[data-year]");
   if (y) y.textContent = new Date().getFullYear();
 })();
+
+/* 花渡右缘悬浮件 .hd-dock：与 in-flow .hd-rail 互斥（rail 在场即隐、滚过即由把手接棒）+ 展开/关闭 */
+(function () {
+  "use strict";
+  var dock = document.querySelector(".hd-dock");
+  if (!dock) return;
+  var rail = document.querySelector(".hd-rail");
+  var handle = dock.querySelector(".hd-handle");
+  var scrim = document.querySelector(".hd-scrim");
+  var wideQ = window.matchMedia("(min-width:1760px)");
+
+  function open() {
+    dock.classList.add("is-open");
+    if (!wideQ.matches && scrim) scrim.classList.add("is-on");
+    if (handle) handle.setAttribute("aria-expanded", "true");
+  }
+  function close() {
+    dock.classList.remove("is-open");
+    if (scrim) scrim.classList.remove("is-on");
+    if (handle) handle.setAttribute("aria-expanded", "false");
+  }
+
+  if (handle) {
+    handle.addEventListener("click", function () {
+      dock.classList.contains("is-open") ? close() : open();
+    });
+  }
+  /* 宽屏（≥1760，右侧空白足够）悬停即预览：面板只滑进空白、物理上不压正文；窄屏只认点击 */
+  dock.addEventListener("mouseenter", function () { if (wideQ.matches) open(); });
+  dock.addEventListener("mouseleave", function () { if (wideQ.matches) close(); });
+  if (scrim) scrim.addEventListener("click", close);
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+  dock.querySelectorAll("[data-hd-close]").forEach(function (b) {
+    b.addEventListener("click", close);
+  });
+
+  /* 互斥接棒：滚过 in-flow 的 .hd-rail（进入 AI 专区/CTA/页脚）后把手才现身；回到正文区自动收起 */
+  if (rail && "IntersectionObserver" in window) {
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var past = e.boundingClientRect.top < 0 && !e.isIntersecting;
+        dock.classList.toggle("is-live", past);
+        if (!past) close();
+      });
+    }, { rootMargin: "-40px 0px 0px 0px" }).observe(rail);
+  } else {
+    dock.classList.add("is-live");
+  }
+})();

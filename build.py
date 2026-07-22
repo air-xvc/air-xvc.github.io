@@ -136,6 +136,24 @@ def hd_rail_html():
         '<a class="hd-more" href="%s" target="_blank" rel="noopener">花渡博客 · 更多实用攻略 ↗</a>'
         '</aside>' % (groups, BLOG))
 
+def hd_dock_html():
+    # 屏幕右缘悬浮件：与 .hd-rail 同源内容。app.js 用 IntersectionObserver 观察 in-flow 的 .hd-rail，
+    # 正文区(rail 在场)隐藏、滚过 rail 后加 .is-live 由把手接棒 —— 二者互斥，绝不同屏重复。
+    # 宽屏(≥1760)展开落在右侧空白 in-gutter 零遮挡；窄屏点击→右侧抽屉+遮罩；手机→右下 FAB→底部 sheet。
+    groups = "".join('<div class="hd-group">%s</div>' % _hd_group(g) for g in HD_GROUPS)
+    return (
+        '<div class="hd-scrim"></div>'
+        '<div class="hd-dock">'
+        '<button class="hd-handle" type="button" aria-expanded="false" aria-label="展开花渡攻略推荐">'
+        '<span class="ic" aria-hidden="true">🌸</span>花渡攻略<span class="go" aria-hidden="true">↗</span></button>'
+        '<aside class="hd-dock-panel" aria-label="花渡攻略推荐">'
+        '<button class="hd-panel-close" type="button" data-hd-close aria-label="收起">×</button>'
+        '<span class="hd-eyebrow">🌸 花渡攻略</span>'
+        '<p class="hd-hook">机场连上了，AI 却打不开、老被封号？<b>这些坑，花渡博客替你趟平了。</b></p>'
+        '%s'
+        '<a class="hd-more" href="%s" target="_blank" rel="noopener">花渡博客 · 更多实用攻略 ↗</a>'
+        '</aside></div>' % (groups, BLOG))
+
 def hd_home_html():
     # 首页 / 机场大全「花渡攻略博客」区块：三组精选教程 + 进入博客主按钮。
     cols = "".join('<div class="hd-home-col">%s</div>' % _hd_group(g) for g in HD_GROUPS)
@@ -418,6 +436,8 @@ def render_detail(a):
     out += '</section>'
     # doc
     out += '<section class="section wrap"><div class="doc">%s<div class="prose">%s</div>%s</div></section>' % (toc_html, prose, hd_rail_html())
+    # 花渡右缘悬浮件（fixed 定位，DOM 位置不影响；放 .doc 之后确保 .hd-rail 先入 DOM 供 IO 观察）
+    out += hd_dock_html()
     # AI 订阅指南引流专区（姊妹站）
     out += ai_promo_html()
     # cta band
