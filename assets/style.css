@@ -345,7 +345,7 @@ table.cmp td.mono{font-family:var(--font-mono);color:var(--ink-2)}
 .nowrap{white-space:nowrap}
 
 /* ---------- doc layout (detail pages: toc + prose) ---------- */
-.doc{display:grid;grid-template-columns:210px minmax(0,1fr);gap:clamp(28px,5vw,60px);align-items:start}
+.doc{display:grid;grid-template-columns:190px minmax(0,1fr) clamp(280px,24%,320px);gap:clamp(24px,3vw,44px);align-items:start}
 .emb{border-radius:16px;flex:none}
 .steps{counter-reset:s;display:grid;gap:14px;margin:18px 0}
 .steps li{position:relative;padding:16px 18px 16px 60px;border:1px solid var(--brd);border-radius:14px;background:var(--panel);color:var(--ink-2)}
@@ -355,7 +355,8 @@ table.cmp td.mono{font-family:var(--font-mono);color:var(--ink-2)}
 .verdict{border:1px solid var(--brd);border-left:3px solid var(--cyan);background:rgba(53,224,212,.06);
   border-radius:12px;padding:16px 20px;color:var(--ink);font-size:15.5px;line-height:1.7}
 .air-card small{font-family:var(--font-mono);font-size:11px;color:var(--ink-3);font-weight:400;letter-spacing:.04em}
-@media (max-width:940px){.doc{grid-template-columns:1fr}.doc .toc{display:none}}
+@media (max-width:1120px){.doc{grid-template-columns:minmax(0,1fr) clamp(264px,33%,320px)}.doc .toc{display:none}}
+@media (max-width:760px){.doc{grid-template-columns:1fr}.doc .hd-rail{order:-1}}
 
 /* ---------- responsive ---------- */
 @media (max-width:940px){
@@ -456,3 +457,77 @@ table.cmp td.mono{font-family:var(--font-mono);color:var(--ink-2)}
   box-shadow:0 10px 24px -12px rgba(255,150,60,.7)}
 @media (max-width:720px){.ai-banner{flex-wrap:wrap;gap:11px;padding:14px}.ai-banner-txt{flex-basis:100%;order:2}
   .ai-banner-dots{order:1}.ai-banner-cta{order:3;width:100%;text-align:center}}
+
+/* ===== 花渡攻略博客 引流组件（互导流｜暖色/彼岸花调，区别于 AI 订阅青紫） ===== */
+
+/* ---------- C. 导航入口（仿 .nav-ai，改用 magenta 区分） ---------- */
+.nav-blog{color:var(--ink)!important;border:1px solid rgba(255,106,213,.42);border-radius:10px;
+  background:linear-gradient(120deg,rgba(255,106,213,.16),rgba(126,123,255,.13));font-weight:600}
+.nav-blog:hover{border-color:var(--magenta)!important;color:#fff!important;
+  background:linear-gradient(120deg,rgba(255,106,213,.26),rgba(126,123,255,.2))!important}
+
+/* ---------- 共用原子：小标题圆点 + 链接行（详情页右栏 & 首页区块共享） ---------- */
+.hd-group-h{display:flex;align-items:center;gap:8px;font-family:var(--font-display);font-weight:600;
+  font-size:13.5px;letter-spacing:-.005em;color:var(--ink);margin-bottom:7px}
+.hd-dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--c);box-shadow:0 0 10px -1px var(--c)}
+.hd-link{display:flex;justify-content:space-between;align-items:center;gap:10px;
+  margin:1px -9px;padding:7px 9px;border-radius:10px;color:var(--ink-2);font-size:13px;line-height:1.4;
+  transition:color .16s ease,background .16s ease,transform .16s ease}
+.hd-link span{flex:none;color:var(--ink-3);font-size:12px;transition:transform .16s ease,color .16s ease}
+.hd-link:hover{color:#fff;background:linear-gradient(100deg,rgba(255,106,213,.14),rgba(126,123,255,.09));transform:translateX(2px)}
+.hd-link:hover span{color:var(--magenta);transform:translateX(3px)}
+
+/* ---------- A. 详情页右侧常驻栏 .hd-rail（.doc 第三列·sticky·延伸阅读广告位） ---------- */
+/* 桌面：独立右栏、随滚动常驻，不再挤占正文；渐变描边+光晕做「炫富」质感 */
+.hd-rail{position:sticky;top:88px;align-self:start;isolation:isolate;overflow:hidden;
+  padding:22px 21px 20px;border:1px solid rgba(255,106,213,.24);border-radius:var(--radius-l);
+  background:
+    radial-gradient(135% 80% at 100% -8%,rgba(255,106,213,.15),transparent 58%),
+    radial-gradient(120% 90% at -12% 112%,rgba(126,123,255,.13),transparent 56%),
+    var(--panel);
+  box-shadow:0 34px 74px -42px rgba(255,106,213,.62),inset 0 1px 0 rgba(255,255,255,.05)}
+/* 顶部暖色渐变描边 + 右上角柔光晕 */
+.hd-rail::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;z-index:2;
+  background:linear-gradient(90deg,var(--amber),var(--magenta) 46%,var(--violet));opacity:.95}
+.hd-rail::after{content:"";position:absolute;top:-46px;right:-46px;width:150px;height:150px;z-index:-1;
+  background:radial-gradient(circle,rgba(255,106,213,.24),transparent 70%);pointer-events:none}
+.hd-rail-top{margin-bottom:2px}
+.hd-eyebrow{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-display);font-weight:700;
+  font-size:15px;letter-spacing:.005em;
+  background:linear-gradient(100deg,var(--amber),var(--magenta) 52%,var(--violet));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hd-hook{margin-top:10px;color:var(--ink-2);font-size:12.5px;line-height:1.62}
+.hd-hook b{color:var(--ink);font-weight:600}
+.hd-group{margin-top:16px;padding-top:15px;border-top:1px solid rgba(255,255,255,.08)}
+.hd-more{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:18px;
+  padding:12px 16px;border-radius:13px;border:0;
+  background:linear-gradient(100deg,var(--magenta),var(--violet));color:#fff;
+  font-family:var(--font-display);font-weight:700;font-size:13.5px;letter-spacing:.005em;
+  box-shadow:0 16px 34px -16px rgba(255,106,213,.78);
+  transition:transform .18s ease,box-shadow .18s ease,filter .18s ease}
+.hd-more:hover{transform:translateY(-2px);filter:brightness(1.07);box-shadow:0 24px 46px -16px rgba(255,106,213,.95)}
+
+/* ---------- B. 首页 / 机场大全 区块 .hd-home（与 .ai-promo 同级、色温偏暖） ---------- */
+.hd-home-head{max-width:640px}
+.hd-home-head h2{font-size:clamp(25px,4vw,40px)}
+.hd-home-head p{color:var(--ink-2);margin-top:14px;font-size:clamp(14.5px,1.6vw,16.5px)}
+/* 暖色化 eyebrow 与渐变标题，与 AI 专区的青蓝拉开色温 */
+.hd-home .eyebrow{color:var(--magenta)}
+.hd-home .eyebrow::before{background:linear-gradient(90deg,var(--magenta),transparent)}
+.hd-home .center .eyebrow::after{background:linear-gradient(270deg,var(--magenta),transparent)}
+.hd-home .grad-text{background:linear-gradient(100deg,var(--amber),var(--magenta) 55%,var(--violet));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.hd-home-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,26px);
+  margin-top:clamp(30px,4vw,44px)}
+.hd-home-col{padding:22px 22px 18px;border:1px solid var(--brd);border-radius:var(--radius-l);
+  background:var(--panel);transition:transform .2s ease,border-color .2s,background .2s}
+.hd-home-col:hover{transform:translateY(-5px);border-color:rgba(255,106,213,.45);background:var(--panel-2)}
+.hd-home-foot{display:flex;justify-content:center;margin-top:clamp(28px,4vw,40px)}
+
+/* ---------- 花渡 响应式（跟随站点 940 / 720 / 620 断点） ---------- */
+@media (max-width:940px){.hd-home-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:760px){
+  /* 详情页右栏 ≤760px：解除 sticky → 全宽卡片，配合 .doc 的 order:-1 置于正文前，保证引流可见 */
+  .hd-rail{position:static;margin:0 0 26px}
+}
+@media (max-width:620px){.hd-home-grid{grid-template-columns:1fr}}

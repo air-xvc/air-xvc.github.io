@@ -98,6 +98,57 @@ def ai_banner_html():
         '<span class="ai-banner-cta">AI 订阅指南 ↗</span></a></div>'
     ) % AI_GUIDE
 
+# ----------------------------------------------------------------------------- 花渡攻略博客引流（互导流）
+# 机场用户＝AI 重度用户：连上机场后最常卡在「反重力装不上、Gemini 被封、谷歌账号申诉」。
+# 花渡博客(guide.rtxk.us)有成体系实用教程正好承接。这里只精选「与机场强相关」的教程做原生延伸阅读位，
+# 不搬机场评测(与本站重复)。改域名/选文只改这一处。所有出站链接一律新标签打开，保机场页留存。
+BLOG = "https://guide.rtxk.us"
+HD_GROUPS = [
+    {"t": "反重力 Antigravity", "c": "#7E7BFF", "links": [
+        ("下载 · 安装 · 中文汉化", "/tutorial/google-antigravity-download-install-chinese.html"),
+        ("配机场代理 / TUN 节点", "/tutorial/antigravity-proxy-tun-node-setup.html"),
+        ("登录卡在扫码验证？", "/tutorial/antigravity/antigravity-qr-verify.html")]},
+    {"t": "Gemini", "c": "#35E0D4", "links": [
+        ("养号防封实战指南", "/tutorial/gemini-account-nurturing.html"),
+        ("打不开 / 连不上排查", "/tutorial/gemini-access-troubleshooting.html"),
+        ("高效使用 & 中文技巧", "/tutorial/gemini-tips-prompt-multimodal.html")]},
+    {"t": "谷歌账号", "c": "#FF6AD5", "links": [
+        ("被封停？申诉解封全流程", "/tutorial/google-account-appeal.html"),
+        ("“电话无法验证”怎么破", "/tutorial/google-account-phone-verification.html"),
+        ("注册 · 避坑全指南", "/tutorial/google-account-register-guide.html")]},
+]
+
+def _hd_group(g):
+    links = "".join(
+        '<a class="hd-link" href="%s%s" target="_blank" rel="noopener">%s<span aria-hidden="true">↗</span></a>'
+        % (BLOG, path, esc(label)) for (label, path) in g["links"])
+    return ('<div class="hd-group-h"><span class="hd-dot" style="--c:%s" aria-hidden="true"></span>%s</div>%s'
+            % (g["c"], esc(g["t"]), links))
+
+def hd_rail_html():
+    # 详情页正文右栏「延伸阅读」浮动广告位：桌面靠右绕排、手机全宽堆叠。只推与机场强相关的教程。
+    groups = "".join('<div class="hd-group">%s</div>' % _hd_group(g) for g in HD_GROUPS)
+    return (
+        '<aside class="hd-rail" aria-label="花渡攻略推荐">'
+        '<div class="hd-rail-top"><span class="hd-eyebrow">🌸 花渡攻略</span>'
+        '<p class="hd-hook">机场连上了，AI 却打不开、老被封号？<b>这些坑，花渡博客替你趟平了。</b></p></div>'
+        '%s'
+        '<a class="hd-more" href="%s" target="_blank" rel="noopener">花渡博客 · 更多实用攻略 ↗</a>'
+        '</aside>' % (groups, BLOG))
+
+def hd_home_html():
+    # 首页 / 机场大全「花渡攻略博客」区块：三组精选教程 + 进入博客主按钮。
+    cols = "".join('<div class="hd-home-col">%s</div>' % _hd_group(g) for g in HD_GROUPS)
+    return (
+        '<section class="section wrap hd-home" id="huadu" aria-label="花渡攻略博客推广">'
+        '<div class="hd-home-head center"><span class="eyebrow center">🌸 花渡攻略博客</span>'
+        '<h2>机场只是船票，<span class="grad-text">上岸后怎么玩转 AI</span></h2>'
+        '<p>Gemini 养号防封、谷歌账号申诉解封、反重力 Antigravity 汉化配置……机场用户最常踩的 AI 坑，'
+        '花渡博客手把手替你趟平。看懂了，机场才没白买。</p></div>'
+        '<div class="hd-home-grid">%s</div>'
+        '<div class="hd-home-foot"><a class="btn btn-primary btn-lg" href="%s" target="_blank" rel="noopener">进入花渡博客 ↗</a></div>'
+        '</section>' % (cols, BLOG))
+
 # ----------------------------------------------------------------------------- helpers
 def chips(items, cls=""):
     return "".join('<span class="chip %s">%s</span>' % (cls, esc(x)) for x in items)
@@ -146,6 +197,7 @@ def nav_html():
 '<a href="/#board">机场榜单</a><a href="/#emby">Emby影音</a><a href="/airports/">机场大全</a>'
 '<a href="/#guide">怎么选</a><a href="/#compare">参数对比</a><a href="/#faq">常见问题</a>'
 '<a class="nav-ai" href="' + AI_GUIDE + '" target="_blank" rel="noopener sponsored">AI订阅 ↗</a>'
+'<a class="nav-blog" href="' + BLOG + '" target="_blank" rel="noopener">攻略博客 ↗</a>'
 '<a class="btn btn-primary nav-cta" href="/airports/">全部机场</a></div></nav></header>')
 
 def footer_html():
@@ -365,7 +417,7 @@ def render_detail(a):
     out += ai_banner_html()
     out += '</section>'
     # doc
-    out += '<section class="section wrap"><div class="doc">%s<div class="prose">%s</div></div></section>' % (toc_html, prose)
+    out += '<section class="section wrap"><div class="doc">%s<div class="prose">%s</div>%s</div></section>' % (toc_html, prose, hd_rail_html())
     # AI 订阅指南引流专区（姊妹站）
     out += ai_promo_html()
     # cta band
@@ -422,6 +474,7 @@ def render_hub():
     out += '</section>'
     # AI 订阅指南引流专区（姊妹站）
     out += ai_promo_html()
+    out += hd_home_html()
     out += '</main>'
     out += footer_html()
     out += SCRIPTS
@@ -802,6 +855,7 @@ def main():
     idx = inject(idx, "FOOTER_AIRPORTS", render_footer_airports())
     idx = inject(idx, "COUNT", str(len(AIRPORTS)))
     idx = inject(idx, "AIPROMO", ai_promo_html())
+    idx = inject(idx, "HDPROMO", hd_home_html())
     open(idx_path, "w", encoding="utf-8").write(idx)
     print("  ✓ index.html (injected)")
     # 404 页也注入同一引流专区，保持「全站每页都挂」
