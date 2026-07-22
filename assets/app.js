@@ -63,40 +63,28 @@
   if (y) y.textContent = new Date().getFullYear();
 })();
 
-/* 花渡右缘悬浮件 .hd-dock：与 in-flow .hd-rail 互斥（rail 在场即隐、滚过即由把手接棒）+ 展开/关闭 */
+/* 花渡悬浮件 .hd-dock：与 in-flow .hd-rail 互斥（rail 在场即隐、滚过即由把手接棒）+ 点击展开/关闭。
+   宽屏(≥1760)面板为纯 CSS 常驻，与本脚本无关；本脚本只管窄屏的「把手现身 + 抽屉开合」。 */
 (function () {
   "use strict";
   var dock = document.querySelector(".hd-dock");
   if (!dock) return;
   var rail = document.querySelector(".hd-rail");
   var handle = dock.querySelector(".hd-handle");
-  var scrim = document.querySelector(".hd-scrim");
-  var wideQ = window.matchMedia("(min-width:1760px)");
 
-  function open() {
-    dock.classList.add("is-open");
-    if (!wideQ.matches && scrim) scrim.classList.add("is-on");
-    if (handle) handle.setAttribute("aria-expanded", "true");
-  }
-  function close() {
-    dock.classList.remove("is-open");
-    if (scrim) scrim.classList.remove("is-on");
-    if (handle) handle.setAttribute("aria-expanded", "false");
-  }
+  function open() { dock.classList.add("is-open"); if (handle) handle.setAttribute("aria-expanded", "true"); }
+  function close() { dock.classList.remove("is-open"); if (handle) handle.setAttribute("aria-expanded", "false"); }
 
   if (handle) {
     handle.addEventListener("click", function () {
       dock.classList.contains("is-open") ? close() : open();
     });
   }
-  /* 宽屏（≥1760，右侧空白足够）悬停即预览：面板只滑进空白、物理上不压正文；窄屏只认点击 */
-  dock.addEventListener("mouseenter", function () { if (wideQ.matches) open(); });
-  dock.addEventListener("mouseleave", function () { if (wideQ.matches) close(); });
-  if (scrim) scrim.addEventListener("click", close);
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
-  dock.querySelectorAll("[data-hd-close]").forEach(function (b) {
-    b.addEventListener("click", close);
+  /* 关闭：点遮罩 / 点面板内 [data-hd-close] / Esc；事件委托到 dock，面板内的链接不受影响 */
+  dock.addEventListener("click", function (e) {
+    if (e.target.closest("[data-hd-close]") || e.target.classList.contains("hd-scrim")) close();
   });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
 
   /* 互斥接棒：滚过 in-flow 的 .hd-rail（进入 AI 专区/CTA/页脚）后把手才现身；回到正文区自动收起 */
   if (rail && "IntersectionObserver" in window) {

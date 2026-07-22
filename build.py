@@ -142,8 +142,8 @@ def hd_dock_html():
     # 宽屏(≥1760)展开落在右侧空白 in-gutter 零遮挡；窄屏点击→右侧抽屉+遮罩；手机→右下 FAB→底部 sheet。
     groups = "".join('<div class="hd-group">%s</div>' % _hd_group(g) for g in HD_GROUPS)
     return (
-        '<div class="hd-scrim"></div>'
         '<div class="hd-dock">'
+        '<div class="hd-scrim"></div>'
         '<button class="hd-handle" type="button" aria-expanded="false" aria-label="展开花渡攻略推荐">'
         '<span class="ic" aria-hidden="true">🌸</span>花渡攻略<span class="go" aria-hidden="true">↗</span></button>'
         '<aside class="hd-dock-panel" aria-label="花渡攻略推荐">'
