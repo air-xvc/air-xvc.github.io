@@ -216,7 +216,7 @@ def nav_html():
 '<a href="/#guide">怎么选</a><a href="/#compare">参数对比</a>'
 '<a class="nav-ai" href="' + AI_GUIDE + '" target="_blank" rel="noopener sponsored">AI订阅 ↗</a>'
 '<a class="nav-blog" href="' + BLOG + '" target="_blank" rel="noopener">攻略博客 ↗</a>'
-'<a class="btn btn-primary nav-cta" href="/airports/">全部机场</a></div></nav></header>')
+'</div></nav></header>')
 
 def footer_html():
     links = "\n".join('<a href="/%s/">%s %s</a>' % (a["slug"], esc(a["name"]), esc(a["en"]))
